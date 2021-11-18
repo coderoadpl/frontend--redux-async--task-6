@@ -1,16 +1,16 @@
 import React from 'react'
 
 import {
-  useSelector
-  //  useDispatch
+  useSelector,
+  useDispatch
 } from 'react-redux'
 
 import { Box, CircularProgress, Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from '@mui/material'
 
-import { getUsers } from './state/users'
+import { createAsyncActionGetUsers } from './state/users'
 
 export const App = () => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const usersState = useSelector((state) => state.users)
 
   return (
@@ -18,7 +18,7 @@ export const App = () => {
       <Container>
         <Button
           sx={{ width: '100%' }}
-          onClick={() => getUsers()}
+          onClick={() => dispatch(createAsyncActionGetUsers())}
           disabled={usersState.loading}
         >
           LOAD USERS
@@ -95,7 +95,7 @@ export const App = () => {
             </Typography>
             <Button
               sx={{ width: 200 }}
-              onClick={() => getUsers()}
+              onClick={() => dispatch(createAsyncActionGetUsers())}
             >
               RETRY
             </Button>

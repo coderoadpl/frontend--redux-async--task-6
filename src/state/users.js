@@ -6,7 +6,7 @@ export const START = 'users/START'
 export const STOP = 'users/STOP'
 export const ERROR = 'users/ERROR'
 
-export const getUsers = async () => {
+export const createAsyncActionGetUsers = () => async () => {
   store.dispatch(createActionStart())
   try {
     const users = await getUsersAPICall()
