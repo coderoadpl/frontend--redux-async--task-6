@@ -1,3 +1,5 @@
+import { createAsyncActionAdd as createAsyncActionAddSnackbar } from './state/snackbars'
+
 export const createAsyncDuck = ({ duckName, asyncFunction }) => {
   const SET = `${duckName}/SET`
   const START = `${duckName}/START`
@@ -9,8 +11,10 @@ export const createAsyncDuck = ({ duckName, asyncFunction }) => {
     try {
       const users = await asyncFunction(...params)
       dispatch(createActionSet(users))
+      dispatch(createAsyncActionAddSnackbar('Successfully loaded users!'))
     } catch (error) {
       dispatch(createActionError(error))
+      dispatch(createAsyncActionAddSnackbar('Error occurred!'))
     }
     dispatch(createActionStop())
   }
