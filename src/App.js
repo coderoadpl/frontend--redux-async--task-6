@@ -1,27 +1,17 @@
 import React from 'react'
 
-import { useSelector, useDispatch } from 'react-redux'
+import {
+  useSelector
+  //  useDispatch
+} from 'react-redux'
 
 import { Box, CircularProgress, Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from '@mui/material'
 
-import { getUsers as getUsersAPICall } from './api'
-
-import { createActionSet, createActionStart, createActionStop, createActionError } from './state/users'
+import { getUsers } from './state/users'
 
 export const App = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const usersState = useSelector((state) => state.users)
-
-  const getUsers = React.useCallback(async () => {
-    dispatch(createActionStart())
-    try {
-      const users = await getUsersAPICall()
-      dispatch(createActionSet(users))
-    } catch (error) {
-      dispatch(createActionError(error))
-    }
-    dispatch(createActionStop())
-  }, [dispatch])
 
   return (
     <div>

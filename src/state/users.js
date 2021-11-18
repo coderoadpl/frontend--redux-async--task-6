@@ -1,7 +1,21 @@
+import { store } from '../store'
+import { getUsers as getUsersAPICall } from '../api'
+
 export const SET = 'users/SET'
 export const START = 'users/START'
 export const STOP = 'users/STOP'
 export const ERROR = 'users/ERROR'
+
+export const getUsers = async () => {
+  store.dispatch(createActionStart())
+  try {
+    const users = await getUsersAPICall()
+    store.dispatch(createActionSet(users))
+  } catch (error) {
+    store.dispatch(createActionError(error))
+  }
+  store.dispatch(createActionStop())
+}
 
 export const createActionSet = (data) => ({
   type: SET,
