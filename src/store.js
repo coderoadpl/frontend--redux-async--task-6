@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 import getUsersReducer from './state/getUsers'
-import snackbarsReducer from './state/snackbars'
+import snackbarsReducer, { createAsyncActionAdd } from './state/snackbars'
 
 const rootReducer = combineReducers({
   getUsers: getUsersReducer,
@@ -17,3 +17,5 @@ export const store = createStore(
     applyMiddleware(thunk)
   )
 )
+
+window.createAsyncActionAdd = (message) => store.dispatch(createAsyncActionAdd(message))

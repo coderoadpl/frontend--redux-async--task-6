@@ -10,6 +10,16 @@ export const createActionRemove = (snackbarId) => ({
   payload: { snackbarId }
 })
 
+export const createAsyncActionAdd = (message) => async (dispatch, getState) => {
+  const state = getState()
+  const snackbarsState = state.snackbars
+  const { newSnackbarId } = snackbarsState
+  dispatch(createActionAdd(message))
+  setTimeout(() => {
+    dispatch(createActionRemove(newSnackbarId))
+  }, 3000)
+}
+
 const initialState = {
   newSnackbarId: 0,
   openSnacbars: []
