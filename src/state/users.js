@@ -1,4 +1,3 @@
-import { store } from '../store'
 import { getUsers as getUsersAPICall } from '../api'
 
 export const SET = 'users/SET'
@@ -6,15 +5,15 @@ export const START = 'users/START'
 export const STOP = 'users/STOP'
 export const ERROR = 'users/ERROR'
 
-export const createAsyncActionGetUsers = () => async () => {
-  store.dispatch(createActionStart())
+export const createAsyncActionGetUsers = () => async (dispatch, getState) => {
+  dispatch(createActionStart())
   try {
     const users = await getUsersAPICall()
-    store.dispatch(createActionSet(users))
+    dispatch(createActionSet(users))
   } catch (error) {
-    store.dispatch(createActionError(error))
+    dispatch(createActionError(error))
   }
-  store.dispatch(createActionStop())
+  dispatch(createActionStop())
 }
 
 export const createActionSet = (data) => ({
