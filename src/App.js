@@ -7,18 +7,18 @@ import {
 
 import { Box, CircularProgress, Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from '@mui/material'
 
-import { createAsyncActionGetUsers } from './state/users'
+import { actionCreators } from './state/getUsers'
 
 export const App = () => {
   const dispatch = useDispatch()
-  const usersState = useSelector((state) => state.users)
+  const usersState = useSelector((state) => state.getUsers)
 
   return (
     <div>
       <Container>
         <Button
           sx={{ width: '100%' }}
-          onClick={() => dispatch(createAsyncActionGetUsers({ number: 20 }))}
+          onClick={() => dispatch(actionCreators.getUsers({ results: 20 }))}
           disabled={usersState.loading}
         >
           LOAD USERS
@@ -95,7 +95,7 @@ export const App = () => {
             </Typography>
             <Button
               sx={{ width: 200 }}
-              onClick={() => dispatch(createAsyncActionGetUsers({ number: 20 }))}
+              onClick={() => dispatch(actionCreators.getUsers({ results: 20 }))}
             >
               RETRY
             </Button>
