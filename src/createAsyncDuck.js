@@ -1,6 +1,4 @@
-import { createAsyncActionAdd as createAsyncActionAddSnackbar } from './state/snackbars'
-
-export const createAsyncDuck = ({ duckName, asyncFunction }) => {
+export const createAsyncDuck = ({ duckName, asyncFunction, callbackResolved, callbackRejected, callbackFinally }) => {
   const SET = `${duckName}/SET`
   const START = `${duckName}/START`
   const STOP = `${duckName}/STOP`
@@ -9,14 +7,15 @@ export const createAsyncDuck = ({ duckName, asyncFunction }) => {
   const createAsyncAction = (...params) => async (dispatch, getState) => {
     dispatch(createActionStart())
     try {
-      const users = await asyncFunction(...params)
-      dispatch(createActionSet(users))
-      dispatch(createAsyncActionAddSnackbar('Successfully loaded users!'))
+      const data = await asyncFunction(...params)
+      dispatch(createActionSet(data))
+      if (callbackResolved) callbackResolved({ data, dispatch, getState })
     } catch (error) {
       dispatch(createActionError(error))
-      dispatch(createAsyncActionAddSnackbar('Error occurred!'))
+      if (callbackRejected) callbackRejected({ error, dispatch, getState })
     }
     dispatch(createActionStop())
+    if (callbackFinally) callbackFinally({ dispatch, getState })
   }
 
   const createActionSet = (data) => ({
