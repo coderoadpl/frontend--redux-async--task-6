@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useAsyncFn } from 'react-use'
 
-import { Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material'
+import { Box, CircularProgress, Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from '@mui/material'
 
 import { getUsers as getUsersAPICall } from './api'
 
@@ -41,6 +41,64 @@ export const App = () => {
           }
         </List>
       </Container>
+      {
+        usersState.loading ?
+          <Box
+            sx={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              display: 'flex',
+              width: '100vw',
+              height: '100vh',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 1,
+              backgroundColor: (theme) => theme.palette.common.white
+            }}
+          >
+            <CircularProgress />
+          </Box>
+          :
+          null
+      }
+      {
+        usersState.error ?
+          <Box
+            sx={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              display: 'flex',
+              width: '100vw',
+              height: '100vh',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              zIndex: 1,
+              backgroundColor: (theme) => theme.palette.common.white
+            }}
+          >
+            <Typography
+              variant={'h5'}
+            >
+              ERROR
+            </Typography>
+            <Typography
+              variant={'body1'}
+            >
+              {usersState.error.message}
+            </Typography>
+            <Button
+              sx={{ width: 200 }}
+              onClick={() => getUsers()}
+            >
+              RETRY
+            </Button>
+          </Box>
+          :
+          null
+      }
     </div>
   )
 }
