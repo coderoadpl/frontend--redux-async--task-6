@@ -5,10 +5,10 @@ export const START = 'users/START'
 export const STOP = 'users/STOP'
 export const ERROR = 'users/ERROR'
 
-export const createAsyncActionGetUsers = () => async (dispatch, getState) => {
+export const createAsyncActionGetUsers = ({ number }) => async (dispatch, getState) => {
   dispatch(createActionStart())
   try {
-    const users = await getUsersAPICall()
+    const users = await getUsersAPICall(number)
     dispatch(createActionSet(users))
   } catch (error) {
     dispatch(createActionError(error))

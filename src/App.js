@@ -18,7 +18,7 @@ export const App = () => {
       <Container>
         <Button
           sx={{ width: '100%' }}
-          onClick={() => dispatch(createAsyncActionGetUsers())}
+          onClick={() => dispatch(createAsyncActionGetUsers({ number: 20 }))}
           disabled={usersState.loading}
         >
           LOAD USERS
@@ -95,7 +95,7 @@ export const App = () => {
             </Typography>
             <Button
               sx={{ width: 200 }}
-              onClick={() => dispatch(createAsyncActionGetUsers())}
+              onClick={() => dispatch(createAsyncActionGetUsers({ number: 20 }))}
             >
               RETRY
             </Button>
