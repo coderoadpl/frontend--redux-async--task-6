@@ -30,6 +30,8 @@ export const createAsyncDuck = ({ duckName, asyncFunction }) => {
     payload: { error }
   })
 
+  const selector = (state) => state[duckName]
+
   const initialState = {
     value: null,
     error: null,
@@ -80,6 +82,7 @@ export const createAsyncDuck = ({ duckName, asyncFunction }) => {
       async: createAsyncAction,
       [duckName]: createAsyncAction
     },
+    selector,
     reducer
   }
 }

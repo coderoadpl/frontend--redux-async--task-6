@@ -5,6 +5,7 @@ import { getUsers as getUsersAPICall } from '../api'
 export const {
   actionTypes,
   actionCreators,
+  selector,
   reducer
 } = createAsyncDuck({
   duckName: 'getUsers',

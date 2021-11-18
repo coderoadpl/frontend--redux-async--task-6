@@ -7,11 +7,11 @@ import {
 
 import { Box, CircularProgress, Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from '@mui/material'
 
-import { actionCreators } from './state/getUsers'
+import { actionCreators, selector } from './state/getUsers'
 
 export const App = () => {
   const dispatch = useDispatch()
-  const usersState = useSelector((state) => state.getUsers)
+  const usersState = useSelector(selector)
 
   return (
     <div>
