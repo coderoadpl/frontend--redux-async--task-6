@@ -7,6 +7,8 @@ import {
 
 import { Box, CircularProgress, Container, Button, List, ListItem, ListItemAvatar, Avatar, ListItemText, Typography } from '@mui/material'
 
+import ViewSnackbars from './views/ViewSnackbars/ViewSnackbars'
+
 import { actionCreators, selector } from './state/getUsers'
 
 export const App = () => {
@@ -103,6 +105,7 @@ export const App = () => {
           :
           null
       }
+      <ViewSnackbars />
     </div>
   )
 }
