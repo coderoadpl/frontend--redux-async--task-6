@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { useSelector } from 'react-redux'
+
 import { Box, Snackbar } from '@mui/material'
 
 export const ViewSnackbars = (props) => {
@@ -9,16 +11,7 @@ export const ViewSnackbars = (props) => {
     ...otherProps
   } = props
 
-  const openSnacbars = [
-    {
-      id: 0,
-      message: 'Error!'
-    },
-    {
-      id: 1,
-      message: 'Success!'
-    }
-  ]
+  const { openSnacbars } = useSelector((state) => state.snackbars)
 
   return (
     <Box
@@ -35,7 +28,7 @@ export const ViewSnackbars = (props) => {
               open={true}
               message={snackbar.message}
               sx={{
-                bottom: 8 + i * 56
+                bottom: `${8 + i * 56}px !important`
               }}
             />
           )
