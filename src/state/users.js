@@ -3,7 +3,7 @@ export const START = 'users/START'
 export const STOP = 'users/STOP'
 export const ERROR = 'users/ERROR'
 
-export const createActionSetUsers = (data) => ({
+export const createActionSet = (data) => ({
   type: SET,
   payload: { data }
 })
